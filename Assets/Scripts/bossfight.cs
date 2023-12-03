@@ -45,7 +45,8 @@ public class bossfight : MonoBehaviour
         if (shootLeft <= 0){
             Vector2 temp = new Vector2(LeftGun.transform.position.x - 0.05f, LeftGun.transform.position.y);
             GameObject p = Instantiate(bossBullet, temp, bossBullet.transform.rotation);
-            p.GetComponent<Rigidbody2D>().velocity = new Vector2(0,-4);
+            p.GetComponent<enemyBulletLogic>().isFromLeftGun = true;
+            p.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -4);
             shootLeft = UnityEngine.Random.Range(minWait,maxWait);
         }
 
@@ -53,6 +54,7 @@ public class bossfight : MonoBehaviour
         if (shootRight <= 0){
             Vector2 temp = new Vector2(RightGun.transform.position.x - 0.05f, RightGun.transform.position.y);
             GameObject p = Instantiate(bossBullet, temp, bossBullet.transform.rotation);
+            p.GetComponent<enemyBulletLogic>().isFromLeftGun = false;
             p.GetComponent<Rigidbody2D>().velocity = new Vector2(0,-4);
             shootRight = UnityEngine.Random.Range(minWait,maxWait);
         }
@@ -70,6 +72,7 @@ public class bossfight : MonoBehaviour
     void bossShoot(){
         Vector2 temp = new Vector2(transform.position.x - 0.05f, transform.position.y);
         GameObject p = Instantiate(bossBullet, temp, bossBullet.transform.rotation);
+        p.GetComponent<enemyBulletLogic>().isFromLeftGun = false;
         p.GetComponent<Rigidbody2D>().velocity = new Vector2(0,-4);    
     }
 
